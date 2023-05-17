@@ -1,33 +1,12 @@
 
-#main {
+.main-1 {
   display: flex;
   flex-direction: column;
-  margin-top: 25px;
 }
-.inp {
-  width: 33%;
-  padding: 6px 12px;
-
-}
-
-button {
-  width: 10%;
-}
-#txt{
-
-  margin-left:15px;
-  margin-top:15px;
-  margin-bottom:15px;
-
- }
- label{
-  margin-right: 5px;
-  font-weight: bold;
- }
- button{
-  margin-left:200px;
-  margin-top: 15px;
- }
- h1{
-  margin-left: 15px;
- }
+.main-2{
+  margin-top:20px;
+  margin-left:20px;
+  }
+  .marg-bot{
+    margin-bottom:5px;
+  }
