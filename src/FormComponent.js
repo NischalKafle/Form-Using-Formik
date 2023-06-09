@@ -1,25 +1,35 @@
 import React from "react";
+import { Alert, Button } from "react-bootstrap";
 import { useFormik } from "formik";
 import {
-  FormControl,
+
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
+ 
   Input,
-  Button,
+ 
 } from "@chakra-ui/react";
+import {useState, useEffect } from "react";
 function FormComponent() {
+  const [isFormSubmitted, setFormSubmitted] = useState(false);
+
+  
+  const handleCloseAlert = () => {
+    setFormSubmitted(false);
+  };
+
+
   const formik = useFormik({
     initialValues: {
       firstname: "",
       lastname: "",
       email: "",
-      age: 35,
+      age: 45,
       password:"",
     },
     onSubmit: (values) => {
       console.log("Submitted Values:", values);
       formik.resetForm();
+      setFormSubmitted(true)
     },
     validate: (values) => {
       let errors = {};
@@ -59,6 +69,17 @@ function FormComponent() {
       return errors;
     },
   });
+  useEffect(() => {
+    let timer;
+    if (isFormSubmitted) {
+      timer = setTimeout(() => {
+        setFormSubmitted(false);
+      }, 5000); 
+    }
+
+    return () => clearTimeout(timer);
+  }, [isFormSubmitted]);
+
   return (
     <div className="main1">
       <div className="main2">
@@ -136,6 +157,19 @@ function FormComponent() {
           <button type="submit">Submit</button>
         </form>
       </div>
+      <div className="main3 success-alert-container">
+
+      {isFormSubmitted && (
+        <Alert variant="success" onClose={handleCloseAlert} dismissible>
+          <Alert.Heading>Form Successfully Submitted</Alert.Heading>
+          <p>Form successfully submitted!</p>
+          <Button variant="secondary" onClick={handleCloseAlert}>
+            Close
+          </Button>
+        </Alert>
+      )}
+</div>
+      
     </div>
   );
 }
